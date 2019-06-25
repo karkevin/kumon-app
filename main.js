@@ -9,7 +9,7 @@ const path = require('path')
  *************************************************************/
 
 const PY_DIST_FOLDER = 'pycalcdist'
-const PY_FOLDER = 'pycalc'
+const PY_FOLDER = 'backend'
 const PY_MODULE = 'api' // without .py suffix
 
 let pyProc = null
@@ -65,25 +65,21 @@ app.on('will-quit', exitPyProc)
  * window management
  *************************************************************/
 
-let mainWindow = null
+let welcomeWindow = null
 
 const createWindow = () => {
-  mainWindow = new BrowserWindow({
+  welcomeWindow = new BrowserWindow({
     width: 800, 
     height: 600, 
     webPreferences: {
       nodeIntegration: true
     }
   })
-  mainWindow.loadURL(require('url').format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file:',
-    slashes: true
-  }))
-  mainWindow.webContents.openDevTools()
+  welcomeWindow.loadFile('src/welcome.html')
+  welcomeWindow.webContents.openDevTools()
 
-  mainWindow.on('closed', () => {
-    mainWindow = null
+  welcomeWindow.on('closed', () => {
+    welcomeWindow = null
   })
 }
 
@@ -96,7 +92,7 @@ app.on('window-all-closed', () => {
 })
 
 app.on('activate', () => {
-  if (mainWindow === null) {
+  if (welcomeWindow === null) {
     createWindow()
   }
 })
