@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <title>Mark Window</title>
+</head>
+
+<body>
+    <img src="../assets/images/kumon.png" width="200px" , height="130px" class="center">
+
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-lg">
+                <input id="std-num" onfocus="this.value=''" value="Enter Student Number..">
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-sm">
+                <p>Number of booklets: </p>
+            </div>
+            <div class="col-sm" id="booklet">
+                <input type="radio" name="number" value="5"> 5<br>
+                <input type="radio" name="number" value="10"> 10<br>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-sm">
+                <p id="scan-text">Ready for Student</p>
+            </div>
+            <div class="col-sm">
+                <button type="button" class="btn btn-primary center" id="scan-button">Scan</button>
+
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-sm">
+                <p id="mark-text">Ready for Student</p>
+            </div>
+            <div class="col-sm">
+                <button type="button" class="btn btn-primary center" id="mark-button">Mark</button>
+
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-sm">
+                <p id="print-text">Ready for Student</p>
+            </div>
+            <div class="col-sm">
+                <button type="button" class="btn btn-primary center" id="print-button">Print</button>
+
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-sm">
+                <input id="reset-std" onfocus="this.value=''" value="Reset Student Number..">
+            </div>
+            <div class="col-sm">
+                <button type="button" class="btn btn-primary center" id="reset-button">Reset</button>
+            </div>
+        </div>
+        <div class="row text-center">
+                <div class="col-sm">
+                    <button type="button" class="btn btn-primary center" id="home">Home</button>
+                </div>
+            </div>
+
+    </div>
+
+    <script>
+        require('./mark.js')
+        // require('../renderer.js')
+    </script>
+</body>
+
+</html>

@@ -2,6 +2,7 @@ const electron = require('electron')
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const path = require('path')
+const ipcMain = electron.ipcMain;
 
 
 /*************************************************************
@@ -65,21 +66,21 @@ app.on('will-quit', exitPyProc)
  * window management
  *************************************************************/
 
-let welcomeWindow = null
+let homeWindow = null
 
 const createWindow = () => {
-  welcomeWindow = new BrowserWindow({
+  homeWindow = new BrowserWindow({
     width: 800, 
     height: 600, 
     webPreferences: {
       nodeIntegration: true
     }
   })
-  welcomeWindow.loadFile('src/welcome.html')
-  welcomeWindow.webContents.openDevTools()
+  homeWindow.loadFile('src/home.html')
+  homeWindow.webContents.openDevTools()
 
-  welcomeWindow.on('closed', () => {
-    welcomeWindow = null
+  homeWindow.on('closed', () => {
+    homeWindow = null
   })
 }
 
@@ -92,7 +93,11 @@ app.on('window-all-closed', () => {
 })
 
 app.on('activate', () => {
-  if (welcomeWindow === null) {
+  if (homeWindow === null) {
     createWindow()
   }
 })
+
+ipcMain.on('load-page', (event, arg) => {
+  homeWindow.loadFile(arg);
+});
