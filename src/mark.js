@@ -3,6 +3,13 @@ const path = require('path');
 const remote = require('electron').remote;
 const ipc = electron.ipcRenderer;
 
+//zeromq stuff
+const zerorpc = require("zerorpc")
+let client = new zerorpc.Client()
+client.connect("tcp://localhost:54321")
+let stdNumber = document.querySelector('#std-number')
+let result = document.querySelector('#result')
+
 var scanText = document.getElementById("scan-text");
 var scanButton = document.getElementById("scan-button");
 var markText = document.getElementById("mark-text");
@@ -13,11 +20,19 @@ scanButton.disabled = true;
 markButton.disabled = true;
 printButton.disabled = true;
 
-var stdNumber;
+
+client.invoke("echo", "server ready", (error, res) => {
+    if (error || res !== 'server ready') {
+        console.error(error)
+    } else {
+        console.log("server is ready")
+    }
+})
 
 document.getElementById("home").addEventListener('click', function (event) {
     ipc.send('load-page', 'src/home.html');
 });
+
 
 // checks if the student number is acceptable.
 function checkNumber(num) {
@@ -34,24 +49,28 @@ function checkNumber(num) {
 }
 
 document.getElementById("enter-button").addEventListener('click', function (event) {
-    stdNumber = document.getElementById("std-number").value;
-    if (checkNumber(Number(stdNumber))) {
-        document.getElementById("check-mark").style.visibility = "visible";
-        booklet();
-    }
+    client.invoke("checkNumber", Number(stdNumber.value), (error, res) => {
+        if (error) {
+            alert("Invalid Student number. Please try again.");
+        } else {
+            document.getElementById("check-mark").style.visibility = "visible";
+            booklet();
+        }
+    })
 })
 
 function booklet() {
     document.getElementById("booklet").addEventListener('click', function (event) {
-        scanText.innerHTML = "Ready to Scan " + stdNumber;
+        scanText.innerHTML = "Ready to Scan " + stdNumber.value;
         scanButton.disabled = false;
     });
 }
 
-scanButton.addEventListener('click', function(event) {
-    scanText.innerHTML = "Scanning " + stdNumber;
+scanButton.addEventListener('click', function (event) {
+    scanText.innerHTML = "Scanning " + stdNumber.value;
     scanButton.disabled = true;
     //Socket stuff
-    
 
 })
+
+

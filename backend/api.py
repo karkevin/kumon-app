@@ -7,12 +7,18 @@ class CalcApi(object):
     def calc(self, text):
         """based on the input text, return the int result"""
         try:
-            return real_calc(text)
+            return "hey"
         except Exception as e:
             return 0.0    
+
     def echo(self, text):
         """echo any text"""
         return text
+    def checkNumber(self, num):
+        lst = [1,123,1234]
+        if num not in lst:
+            raise ValueError('Student Number not in lst') 
+        
 
 def parse_port():
     port = 54321
