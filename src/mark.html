@@ -6,73 +6,85 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css//mark.css">
     <title>Mark Window</title>
 </head>
 
 <body>
-    <img src="../assets/images/kumon.png" width="200px" , height="130px" class="center">
-
     <div class="container">
-        <div class="row text-center">
-            <div class="col-lg">
-                <input id="std-num" onfocus="this.value=''" value="Enter Student Number..">
+        <div class="row">
+            <div class="col-4">
+                <button type="button" class="btn btn-primary my-button" id="home">Home</button>
+            </div>
+            <div class="col-4  text-center">
+                <img src="../assets/images/kumon.png" width="200px" height="130px">
             </div>
         </div>
-        <div class="row text-center">
-            <div class="col-sm">
+        <div class="row row-margin extra-margin">
+            <div class="col-8 text-center">
+                <input type="text" value="Enter Student Number.." onfocus="stdentNumberField(this)" id="std-number">
+            </div>
+            <div class="col-2">
+                <input type="button" value="Enter" class="btn btn-primary my-button" id="enter-button" />
+            </div>
+            <div class="col-2">
+                    <img src="../assets/images/check.png" width="30" height="23" id="check-mark">
+            </div>
+        </div>
+        <div class="row  row-margin">
+            <div class="col-8">
                 <p>Number of booklets: </p>
             </div>
-            <div class="col-sm" id="booklet">
+            <div class="col-4 " id="booklet">
                 <input type="radio" name="number" value="5"> 5<br>
                 <input type="radio" name="number" value="10"> 10<br>
             </div>
         </div>
-        <div class="row text-center">
-            <div class="col-sm">
-                <p id="scan-text">Ready for Student</p>
+        <div class="row  row-margin extra-margin">
+            <div class="col-8 ">
+                <p id="scan-text">Waiting for Response</p>
             </div>
-            <div class="col-sm">
-                <button type="button" class="btn btn-primary center" id="scan-button">Scan</button>
+            <div class="col-4 ">
+                <button type="button" class="btn btn-primary my-button" id="scan-button">Scan</button>
 
             </div>
         </div>
-        <div class="row text-center">
-            <div class="col-sm">
-                <p id="mark-text">Ready for Student</p>
+        <div class="row  row-margin">
+            <div class="col-8 ">
+                <p id="mark-text">Waiting for Response</p>
             </div>
-            <div class="col-sm">
-                <button type="button" class="btn btn-primary center" id="mark-button">Mark</button>
+            <div class="col-4 ">
+                <button type="button" class="btn btn-primary my-button" id="mark-button">Mark</button>
 
             </div>
         </div>
-        <div class="row text-center">
-            <div class="col-sm">
-                <p id="print-text">Ready for Student</p>
+        <div class="row  row-margin">
+            <div class="col-8 ">
+                <p id="print-text">Waiting for Response</p>
             </div>
-            <div class="col-sm">
-                <button type="button" class="btn btn-primary center" id="print-button">Print</button>
+            <div class="col-4 ">
+                <button type="button" class="btn btn-primary my-button" id="print-button">Print</button>
 
             </div>
         </div>
-        <div class="row text-center">
-            <div class="col-sm">
-                <input id="reset-std" onfocus="this.value=''" value="Reset Student Number..">
+        <div class="row  row-margin extra-margin">
+            <div class="col-8 text-center">
+                <input type="text" value="Reset Student Number.." onfocus="this.value=''">
             </div>
-            <div class="col-sm">
-                <button type="button" class="btn btn-primary center" id="reset-button">Reset</button>
+            <div class="col-4 ">
+                <button type="button" class="btn btn-primary my-button" id="reset-button">Reset</button>
+
             </div>
         </div>
-        <div class="row text-center">
-                <div class="col-sm">
-                    <button type="button" class="btn btn-primary center" id="home">Home</button>
-                </div>
-            </div>
+
 
     </div>
-
     <script>
-        require('./mark.js')
-        // require('../renderer.js')
+        require("./mark.js");
+        function stdentNumberField(field) {
+            field.value = '';
+            document.getElementById("check-mark").style.visibility = "hidden";
+        }
     </script>
 </body>
 

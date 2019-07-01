@@ -76,8 +76,9 @@ const createWindow = () => {
       nodeIntegration: true
     }
   })
-  homeWindow.loadFile('src/home.html')
-  homeWindow.webContents.openDevTools()
+  homeWindow.loadFile('src/home.html');
+  // homeWindow.loadFile('src/mark.html')
+  // homeWindow.webContents.openDevTools()
 
   homeWindow.on('closed', () => {
     homeWindow = null
