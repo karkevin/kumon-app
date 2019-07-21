@@ -14,12 +14,18 @@
     margin-top: 1% 
 }
 
+
 #home {
     margin-top: 10%;
 }
 
 .extra-margin {
-    margin-top: 5%;
+    margin-top: 10%;
+}
+
+#booklet{
+    display: flex;
+    flex-direction: column;
 }
 
 #check-mark {

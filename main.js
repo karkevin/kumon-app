@@ -14,7 +14,7 @@ const PY_FOLDER = 'backend'
 const PY_MODULE = 'api' // without .py suffix
 
 let pyProc = null
-let pyPort = null
+let pyPort = 54321
 
 const guessPackaged = () => {
   const fullPath = path.join(__dirname, PY_DIST_FOLDER)
@@ -31,14 +31,9 @@ const getScriptPath = () => {
   return path.join(__dirname, PY_DIST_FOLDER, PY_MODULE, PY_MODULE)
 }
 
-const selectPort = () => {
-  pyPort = 54321
-  return pyPort
-}
-
 const createPyProc = () => {
   let script = getScriptPath()
-  let port = '' + selectPort()
+  let port = '' + pyPort
 
   if (guessPackaged()) {
     pyProc = require('child_process').execFile(script, [port])
@@ -71,12 +66,12 @@ let homeWindow = null
 const createWindow = () => {
   homeWindow = new BrowserWindow({
     width: 800, 
-    height: 600, 
+    height: 700, 
     webPreferences: {
       nodeIntegration: true
     }
   })
-  homeWindow.loadFile('src/home.html');
+  homeWindow.loadFile('src/mark.html');
   // homeWindow.loadFile('src/mark.html')
   // homeWindow.webContents.openDevTools()
 
