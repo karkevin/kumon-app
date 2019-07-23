@@ -40,7 +40,7 @@ const createPyProc = () => {
   } else {
     pyProc = require('child_process').spawn('python', [script, port])
   }
- 
+
   if (pyProc != null) {
     //console.log(pyProc)
     console.log('child process success on port ' + port)
@@ -62,23 +62,25 @@ app.on('will-quit', exitPyProc)
  *************************************************************/
 
 let homeWindow = null
+let win = null
 
 const createWindow = () => {
   homeWindow = new BrowserWindow({
-    width: 800, 
-    height: 700, 
+    width: 800,
+    height: 700,
     webPreferences: {
       nodeIntegration: true
     }
   })
   homeWindow.loadFile('src/mark.html');
-  // homeWindow.loadFile('src/mark.html')
-  // homeWindow.webContents.openDevTools()
+  homeWindow.webContents.openDevTools();
 
   homeWindow.on('closed', () => {
     homeWindow = null
   })
+
 }
+
 
 app.on('ready', createWindow)
 
@@ -96,4 +98,32 @@ app.on('activate', () => {
 
 ipcMain.on('load-page', (event, arg) => {
   homeWindow.loadFile(arg);
+});
+
+ipcMain.on('page-number', (event, arg) => {
+  homeWindow.webContents.send('pageNumber', arg);
+});
+
+ipcMain.on('display-image', (event, arg) => {
+    win = new BrowserWindow({
+      width: 600,
+      height: 500,
+      frame: false,
+      alwaysOnTop: true,
+      parent: homeWindow,
+      webPreferences: {
+        nodeIntegration: true
+      },
+      show: false
+    });
+    win.loadFile('src/popUpImage.html');
+
+  win.on('close', (event) => {
+      win = null;
+  })
+  win.once('ready-to-show', () => {
+    // win.webContents.openDevTools();
+    win.webContents.send('displayImage', arg);
+    win.show();
+  });
 });

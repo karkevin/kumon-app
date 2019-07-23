@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 80vw;
+        }
+
+        .item {
+            margin-top: 10%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="" alt="Page" class='item' width="400" height="200">
+        <input type="text" value="Enter Page Number.." onfocus="pageNumberField(this)" id="page-number" class='item'>
+        <button type="button" class="btn btn-primary my-button item" id="enter">Enter</button>
+    </div>
+
+    <script>
+        const electron = require('electron');
+        const remote = require('electron').remote;
+        const ipc = electron.ipcRenderer;
+
+        var pageNumber = document.querySelector('#page-number')
+        var enterButton = document.querySelector('#enter');
+        var image = document.querySelector('img');
+
+
+        enterButton.addEventListener('click', function () {
+            ipc.send('page-number', Number(pageNumber.value));
+            var window = remote.getCurrentWindow();
+            window.close();
+        })
+
+        function pageNumberField(field) {
+            field.value = '';
+        }
+        ipc.once('displayImage', (event, arg) => {
+            image.src = arg;
+        })
+    </script>
+</body>
+
+</html>

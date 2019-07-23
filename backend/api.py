@@ -36,41 +36,52 @@ class KumonApi(object):
 
         # mark_student(std_number, booklet_order)
         time.sleep(3)
-        return std_number
+        return True
 
 
-    # display something that says 'marking...'
-    def scanning_finished(self):
-        pass
+    # # display something that says 'marking...'
+    # def scanning_finished(self):
+    #     pass
 
-    # display something that says 'printing...'
-    def marking_finished(self):
-        pass
+    # # display something that says 'printing...'
+    # def marking_finished(self):
+    #     pass
 
-    # display something that says 'done!'
-    # un-gray out the Mark/Start button
-    def printing_finished(self):
-        pass
+    # # display something that says 'done!'
+    # # un-gray out the Mark/Start button
+    # def printing_finished(self):
+    #     pass
 
-    def display_image(self, image_path):
+    def get_image_path(self):
+        """
+        Gets the file path of the image to be displayed.
+        This method is to be implemented in a dependency, it is implemented here for testing.
+        """
+
+        return "../assets/images/kumon.png"
+
+    def display_image(self):
         """
         Tell UI to display image of a page and request the user to enter a page number.
-        @param image_path - file path to the image
         """
-        pass
+        image_path = self.get_image_path()
+        return image_path
+
 
     def get_path_number(self, page_number):
         """
         Gets the page number that the user inputs. 
         """
-        pass
+        time.sleep(1);
+        return True;
 
     def reset(self):
         """
         Called when user presses the reset button.
         Display a 5 second loading screen to allow all the backend reset stuff to finish.
         """
-        pass
+        time.sleep(3);
+        return True;
 
         # TODO implement reset function
 
